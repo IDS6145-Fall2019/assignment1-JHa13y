@@ -2,6 +2,7 @@
 
 The POTS system models a self watering system which is comprised of a container, filled with a type of soil and a group of vegetables.  Every time step, the vegetables will consume water and nutrients and grow.  When water or nutrients are depleted, the vegetables will die. 
 
+**Note: Press 'c' to add compost, and 'w' to water.  On *nix you need to press enter after hitting a key due to how python line buffers input**
 
 My POTS System Diagram Object Diagram
 
