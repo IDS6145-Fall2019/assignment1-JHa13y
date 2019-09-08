@@ -11,3 +11,6 @@ My POTS (Basic) Object Diagram
 From the above Object diagram, you can see there are 3 main objects involved in the simulation all with different subclasses of object:  1) Container which are filled with vegetables, soil and water.  2)  Soil which provides nutrients. 3) Vegetables which consume water and nutrients to grow. 
 
 The Specific Objects, Object SubTypes, Methods and Fields are given in the class diagram below. 
+![POTS system](../../images/Homework1Pots.jpg)
+
+The Main simulation loop is given below in the action diagram
