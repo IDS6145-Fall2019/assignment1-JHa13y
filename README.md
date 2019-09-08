@@ -1,8 +1,9 @@
 # Assignment 1 - Designing Models and Analyzing Data (Template)
-(remove: **text between brackets to be removed**)
 
-> * Participant name: (your name)
-> * Project Title: (Title of the problem you are looking and modeling)
+
+Participant name: Joshua Haley
+
+Project Title: Subway *TBD*
 
 # General Introduction
 
@@ -71,17 +72,33 @@ Here [**we provide an overview**](code/POTS_system/README.md) of the **P**ortabl
 # Part 3: Data Analysis
 
 ## (Part 3.1) - Real Data **(10%)**
+I identified a data source from the NYC MTA that contains individual turnstile entries and exit counts from the year 2018.   Included in this report is a sampling of the first 1024 lines of the CSV based file.  (The whold data set is 822MB and is not appropriate for git)  This data is critical because in agregation it can tell us how many individuals are entering a particular subway station, as well as how many are leaving it.  This lets us build a model for the external boundary of the whole subway system, as well as a model for the flow of individuals through a single subway stations boundaries.  While rideship in aggregate is important, we need to know the relation between riders who get on at station A and then take Line X to Station B to better model the escalator entrance and exit.
 
-Find a datasource that looks at part of this model - subway stations locations / escalator number, heights, widths / volume of passangers - ridership numbers   (*fits* - we are pretty loose here, it can be anything.)
+**Note** Stats were calculated on the real data which can be found at: https://data.ny.gov/Transportation/Turnstile-Usage-Data-2018/bjcb-yee3, but only the first 1024 lines were included into .
 
-* Write up a paragraph that describes the data and how it fits into your system.
-* Load the data into Python
-* Calculate a few useful statistic on the data - keep it simple- STD, means, etc..., this is just designed * to get used to working with real data. Explain the insights you derive from these statistics.
-* Visualize the raw data - visualize a few critical aspects of the data to better describe what it is, what it is showing, and why its useful to your system.
-* Calculate and plot some summary statistics that better describe the data.
+Code to calculate stats is located [**the following folder**](code/MTA_Data_Munge/). With documentation[**Here**](code/MTA_Data_Munge/README.md)
 
-(Add your plots and visualization here)
-(Put your data into the data directory)
+Each Row contains the following information as outlined in the data dictionary:
+
+![MTA Turnstile Data Dictionary](images/MTA_DD1.png)
+![MTA Turnstile Data Dictionary](images/MTA_DD2.png)
+
+
+After Loading the Data into python we can see the following:
+
+* There are 357 different Train Stations
+* There are 3813 different Turnstile Devices
+* On Average each station has 10.6 turnstiles
+
+
+Note: Regarding Enterance and Exit counts; Those are accumulator values that are not cleared and are sampled several times a day.  So it will need to be cleaned into a form to get true enterances/exits per day for our simulation. 
+
+![Turnstiles per Station](images/turnstile_histogram.png)
+
+Futher analysis is required to munge the data into a form usable for a baysian based model of transit, but it has all of the information to calculate how many people are entering and exiting each station, as well as how the stations are connected together. 
+
+
+
 
 
 ## (Part 3.2) -  Plotting 2D Random Number Generators **(15%)**

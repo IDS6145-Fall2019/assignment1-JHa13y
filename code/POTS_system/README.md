@@ -14,4 +14,3 @@ From the above Object diagram, you can see there are 3 main objects involved in 
 The Specific Objects, Object SubTypes, Methods and Fields are given in the class diagram below. 
 ![POTS system](../../images/Homework1Pots.png)
 
-The Main simulation loop is given below in the action diagram
