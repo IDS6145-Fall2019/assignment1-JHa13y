@@ -29,7 +29,7 @@ def WaitForKeyPress(L):
 
         try:
             result = sys.stdin.read(1)
-            L.append(None)
+            L.append(result.strip())
         except IOError:
             pass
         finally:
@@ -59,11 +59,34 @@ def Simulate():
     timestep = 0
     global thewater
     global containers
+    print("Press c to add compost, w to water, and k to kill the sim (Note: On *nix press the key and then 'enter'")
     _thread.start_new_thread(WaitForKeyPress, (L,))
 
     while 1:
         time.sleep(1) # delay for 1 second.
-        if L: break
+        if L:
+            print("Recieved Input")
+            for l in L:
+            #Note: If the key is c, assume this means add compost
+                if l is 'c':
+                    print("Adding Compost to the Containers!")
+                    for c in containers:
+                        c.nutrientReserve += 100
+                # If W: Assume this means add Water
+                elif l is 'w':
+                    print("Adding water to the Containers!")
+                    for c in containers:
+                        c.waterReserve += 25
+                # If K; Kill the Sim
+                elif l is 'k':
+                    break
+            L.clear()
+            #Hack to restart the keypress thread
+            _thread.start_new_thread(WaitForKeyPress, (L,))
+
+
+
+
 
         print ("The timestep of the simulation is: {}".format(str(timestep)))
         timestep+=1
