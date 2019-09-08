@@ -1,15 +1,13 @@
 ## **P**ortable **O**rganic **T**rouble-free **S**elf-watering System (**POTS**) Model
 
-(Remove: decribe the model here, use whatever diagram you need object, class, etc)
-
-(Remove: The code does run - you should try it. It does not do much, but has a very basic 
-simulation loop in it and key press to take a look at.)
-
-(Remove: You kill your plants after a key timesteps, but you could always add nuterients
-from compost and add more water and tweak it based on measured constants to simulate
-a real system)
+The POTS system models a self watering system which is comprised of a container, filled with a type of soil and a group of vegetables.  Every time step, the vegetables will consume water and nutrients and grow.  When water or nutrients are depleted, the vegetables will die. 
 
 
-Example linked diagram to help you.
-![POTS system](../../images/class_example_diagram.png)
-more decription
+My POTS System Diagram Object Diagram
+
+My POTS (Basic) Object Diagram
+![POTS system](../../images/pots_basic_object.jpg)
+
+From the above Object diagram, you can see there are 3 main objects involved in the simulation all with different subclasses of object:  1) Container which are filled with vegetables, soil and water.  2)  Soil which provides nutrients. 3) Vegetables which consume water and nutrients to grow. 
+
+The Specific Objects, Object SubTypes, Methods and Fields are given in the class diagram below. 
