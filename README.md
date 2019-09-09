@@ -114,5 +114,11 @@ We can see from the above plot, that the Quasi-Random numbers are more evenly di
 ## (Part 3.3) -  Plotting 1D Random Distributions **(15%)**
 
 Now, choose three different distributions to plot in 1D, or as a histogram. Choose a pseudo-random generator and generate three different distributions. Example distributions are Uniform (part 8), Normal, Exponential, Poisson, and Chi-Squared, but feel free to use any three distributions of your choice. Again, plot each distribution for five different Ns. This will result in 15 different subplots, formatted similar to the image in Part 8. Include your properly formmated 1D plots below and breifly describe what we are looking at and how things change as N is changed.
+![Image of 2d template City](images/RandomDistributions.png)
+
+The three distributions chosen were Uniform, Standard (Mu = 0.5, std=0.25) and Binomial with peaks at 0 and 1 of equal value.   Looking at the above, we can see as N is increased, our distribution plots better approximate the given distribution.
+
+###Repeating with Quasirandom Numbers 
+
 
 Repeat the above using a quasi-random generator. Discuss the similarities and differences.
