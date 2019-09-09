@@ -12,8 +12,8 @@ def main():
     i=0;
     for n in N:
         #Generate X, #Generate Y
-        df = pd.DataFrame({'x': 10 * np.random.random_sample(n),
-                           'y': 10 * np.random.random_sample(n),
+        df = pd.DataFrame({'x': 10 * np.random.uniform(0,1,n),
+                           'y': 10 * np.random.uniform(0,1,n),
                            'N': np.repeat(n, n),
                            'Type': 'random'})
         if rand2d is None:
