@@ -3,6 +3,7 @@ import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
 import sobol_seq
+import chaospy as cp
 
 
 def main():
@@ -24,9 +25,9 @@ def main():
                            'Type': 'Normal'})
         rand2d = rand2d.append(df)
 
-        df = pd.DataFrame({'x': np.random.binomial(1, 0.5, n),
+        df = pd.DataFrame({'x': np.random.exponential(0.25, n),
                            'N': np.repeat(n, n),
-                           'Type': 'Binomial'})
+                           'Type': 'Exponential'})
         rand2d = rand2d.append(df)
 
 
@@ -36,13 +37,34 @@ def main():
     plt.show()
 
     #Now Generate the QuasiRandom Plot
-    quasi = sobol_seq.i4_sobol_generate(2, n).transpose()
-    df = pd.DataFrame({'x': 10 * quasi[0],
-                       'y': 10 * quasi[1],
-                       'N': np.repeat(n, n),
-                       'Type': 'Quasirandom'})
+    rand2d = None
+    for n in N:
+        #Generate X, #Generate Y
+        distribution = cp.Uniform(0, 1)
+        df = pd.DataFrame({'x': distribution.sample(n, rule='S'),
+                           'N': np.repeat(n, n),
+                           'Type': 'Uniform'})
+        if rand2d is None:
+            rand2d = df
+        else:
+            rand2d= rand2d.append(df)
 
-    rand2d = rand2d.append(df)
+        distribution = cp.Normal(0.5, 0.25)
+        df = pd.DataFrame({'x': distribution.sample(n, rule='S'),
+                           'N': np.repeat(n, n),
+                           'Type': 'Normal'})
+        rand2d = rand2d.append(df)
+
+        distribution = cp.Exponential(0.25,0)
+        df = pd.DataFrame({'x': distribution.sample(n, rule='S'),
+                           'N': np.repeat(n, n),
+                           'Type': 'Exponential'})
+
+        rand2d = rand2d.append(df)
+    g = sns.FacetGrid(rand2d, col='N', row='Type')
+    g = g.map(sns.distplot, 'x', hist=False)
+    plt.show()
+
 
 if __name__ == "__main__":
     # execute only if run as a script
