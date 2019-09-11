@@ -122,4 +122,5 @@ The three distributions chosen were Uniform, Standard (Mu = 0.5, std=0.25) and E
 
 ![QuasiRandom Distributions](images/QuasirandomDists.png)
 Repeat the above using a quasi-random generator . Discuss the similarities and differences.
+
 I used Chaospy using Sobol Sampling to generate the distirbutions.  Like before, as N was increased the shape of the distribution better approached the ideal.  However, with a more spread sampling it took a lower N to reach the same result.
