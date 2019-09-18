@@ -3,7 +3,7 @@
 
 Participant name: Joshua Haley
 
-Project Title: Subway *TBD*
+Project Title: Subway Eescalatorscalator Policies
 
 # General Introduction
 
@@ -16,49 +16,72 @@ The second part of the assignment explores data analysis. Data analysis and visu
 
 # Part 1: Designing a Model - Subway System
 
-(remove: States your motivation clearly: why is it important / interesting to solve this problem?)
+Sticking with the initial problem of Subway escalator systems, it is interesting to us to maximize transportation throughput to maximize utility and minimize cost.  In particular, if existing infrastructure already exists, it can be very costly to build new infrastructure rather than test additional control schemes for existing systems.  This is a problem that cities currently face as infrastructure ages while population increase beyond original design. 
 
-(remove: Add real-world examples, if any)
+A more general problem is the maximization of throughput when you have multiple lanes of travel with variable directionality.  Expressways are a perfect instance of this where a road may be east to west for morning rush hour, and then reverse for afternoon rush hour. 
 
-(remove: Put the problem into a historical context, from what does it originate? Are there already some proposed solutions?)
-
+We will look specifically at the excolator problem in the context of a discrete agent based simulation.  The simulation should allow us to identify benefit or decrement of escalator policy. 
 
 ![Image of Subway City System](images/subway_model.png)
 
+Hypothesis: Policy (stand only vs walking allowed) has an effect on throughput through an escalator. In particular stand only will lead to increased throughput.   The null hypothesis is that standing only will *not* lead to an increase in throughput. 
+
 ## (Part 1.1): Requirements (Experimental Design) **(10%)**
+* The simulation shall allow for multiple escaescalatorlator policies (standing only vs walking lane).
+* The simulation shall allow for a specific proportion of each policy to be randomly assigned. 
+* The simulation shall allow for us to set a rate at which new individuals enter the escalator queue
+* Ths simulation should allow for a third policy (I'm going to stand in the walking lane) to be probabilistically selected. 
+* The simulation shall simulate atleast one escalator. 
+* The simulation shall spatially have discretization of approximately the footprint of a single individual.
+* Individuals shall not be able to simultaneously occupy the same space.
+* Simulation should report number of individual through a single escalator as people per time period
 
-(remove: You should start by specifying a set of requirements. I specified a topic a Subway escalator. What exactly does that mean - practice formulating your own set of requirements and an experiment. Define problems cities face and hypothesize how a subway system could help alleviate these issue. This helps you think about your problem communication and system objectives inputs, functions, and outputs - they should be clearly specified.)
 
-## (Part 1.2) Subway (My Problem) Model **(10%)**
 
-(remove: add a high-level overview of your model, the part below should link to the model directory markdown files)
-(remove: Look at the [**Object Diagram**](model/object_diagram.md) for how to structure this part of Part 2 for each diagram. Only the Object diagram has the template, the rest are blank. )
 
-* [**Object Diagram**](model/object_diagram.md) - provides the high level overview of components
-* [**Class Diagram**](model/class_diagram.md) - provides details of (what are you providing details of)
-* [**Behavior Diagram**](model/behavior_diagram.md) - provides details of (what are you providing details of)
-* [**Agent / User case** (if appropriate)](model/agent_usecase_diagram.md) - provides details of (what are you providing details of)
+## (Part 1.2) Subway Escalator Model **(10%)**
+At a high level.  We will have an infinite queue of people trying to get from one side of the esolator. Individuals will have the option to get on at the standing only space, the 2nd standing space, or walking space.  Individuals will be assigned the policy of walk or stand. 
 
-## (Part 1.3) Subway (My Problem) Simulation **(10%)**
+* [**Object Diagram**](model/object_diagram.md) - provides the high level overview of components for our simulation.
+* [**Class Diagram**](model/class_diagram.md) - provides details of the classes to be implemented for the discrete time escalator simulation.
+* [**Behavior Diagram**](model/behavior_diagram.md) - provides details of the main timestep loop of the escalator model.
 
-(remove: Describe how you would simulate this - including type of simulation, rough details, inputs, outputs, and how it will help you analyze your experimental hypothesis, or nullify your null hypothesis.)
+## (Part 1.3) Subway Escalator Simulation **(10%)**
+I will simulate the escalator using a discrete time simulation with where the escalator is is a set number of spots that can be stood in.   Starting from the end of the ecalator we will update position(s) of current occupants for each timestep and then add any additional new occupants to the escalator. 
+
+Inputs include the proportion of walkers, policy decisions, how many standers will rudely stand in the walking lane.
+
+Outputs incude the number of individuals per time period that traverse the escalator successfully.   
+ We will run the simulation several times in different conditions to see if there are significant differences between conditions either confirming our hypothesis or the null hypothesis. 
+ 
+
 
 
 ## (Part 1.4) Subway City (My Problem) Model **(10%)**
-[**Code template**](code/README.md) - Starting coding framework for the (insert your exact problem here.)
-You are expected to create the python files - the code should run without errors, create and object(s) for your system, but not provide function detail.
-
-
+[**Code template**](code/README.md) - Starting coding framework for the Subway Escalator Problem
 
 ## (Part 1.5) Specifying the Inputs to a System **(10%)**
+Independent variables for the given system are:
 
-(remove the below points once ideas are satisfied)
-* Specify the independent and dependent input variables of your subway esclator model
-* Specify where the data will come from measured subset of real data (empirical) or synthetic data
-* What kind of statistics are important to capture this input data
-* How do you plan to analyze the output of your model?
-* What ways will you visualize your data - charts, and graphs you will create?
-* What clever way will you visualize your output with a useful infographic?
+* Policy type decision
+* Proporition of walkers to standing individuals
+* Proportion of standers who will stand in the walk lane
+* How much space walkers keep ahead of them while walking
+* Amount of individuals joining the queue during each time step.
+
+Dependent variables are:
+
+* Number of individuals through the escalator in a given time.
+* Average size of the escalator queue 
+* Average occupancy of the escalator
+
+The dependent variables will be genreated synthetically.  Reasonable proportions for walkers vs standing individuals and standers who stand in the walk lane can be gained from empirical surveys. Ideally this will be captured over multiple observations to gain a distribution over a specified number of time that can be sampled.   In order for this to be valid, we will need to make sure we have sufficient samples and sample at different points of time so we have a non-biased statistic.   Similarly we can determine how much space walkers tend to keep ahead of them through observational survey.
+
+Our model has probablistic elements, so it will need to be be run in several configurations allowing us to see the dependent variables with respect variability introduced by random variables. 
+
+To visualize my data for results communication I would use a simple bar plot breaking out each condition with total throughput.  Depending on how important the occupancy over time is, I would present them as throughput overtime with representation of occupancy and queue size. 
+
+For a flashy infographic.  I would have a pictoral representation showing the occupancy of the excalator.  I would represent relative throughput with the number of people of people at the top of an upward escalator walking away happily. I would represent queue size with numbers of frustrating individuals at the base of an upward escalator waiting to enter.   Depending on the results and the story we are trying to tell, I could change the colors to indicate frustration of people waiting with a positive color of those leaving the escalator. 
 
 
 
